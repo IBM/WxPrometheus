@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">wx.prometheus.pub.registerMetrics</value>
+  <value name="is_public">false</value>
+  <value name="encodeutf8">true</value>
+  <value name="shared">cHJpdmF0ZSBzdGF0aWMgSGFzaE1hcDxTdHJpbmcsIFN0cmluZ1tdPiByZWdpc3RlcmVkTWV0cmlj
+cyA9IG5ldyBIYXNoTWFwPFN0cmluZywgU3RyaW5nW10+KCk7CnN0YXRpYyBMb2dnZXIgbG9nZ2Vy
+ID0gTG9nZ2VyLmdldExvZ2dlcigid3gucHJvbWV0aGV1cyIpOw==</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.util.Arrays</value>
+    <value>java.util.HashMap</value>
+    <value>java.util.LinkedList</value>
+    <value>com.wm.data.IData</value>
+    <value>com.wm.data.IDataFactory</value>
+    <value>com.wm.data.IDataUtil</value>
+    <value>org.apache.log4j.Level</value>
+    <value>org.apache.log4j.Logger</value>
+  </array>
+</Values>
