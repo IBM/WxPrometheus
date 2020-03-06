@@ -6,16 +6,17 @@
   <value name="node_nsName">wx.prometheus.pub.registerMetrics</value>
   <value name="is_public">false</value>
   <value name="encodeutf8">true</value>
-  <value name="shared">cHJpdmF0ZSBzdGF0aWMgSGFzaE1hcDxTdHJpbmcsIFN0cmluZ1tdPiByZWdpc3RlcmVkTWV0cmlj
-cyA9IG5ldyBIYXNoTWFwPFN0cmluZywgU3RyaW5nW10+KCk7CnN0YXRpYyBMb2dnZXIgbG9nZ2Vy
-ID0gTG9nZ2VyLmdldExvZ2dlcigid3gucHJvbWV0aGV1cyIpOw==</value>
+  <value name="shared">Ly8JcHJpdmF0ZSBzdGF0aWMgamF2YS51dGlsLkxpc3Q8U3RyaW5nW10+IHJlZ2lzdGVyZWRNZXRy
+aWNzID0gbmV3IGphdmEudXRpbC5BcnJheUxpc3Q8U3RyaW5nW10+KCkgOwpwcml2YXRlIHN0YXRp
+YyBqYXZhLnV0aWwuTWFwPFN0cmluZywgU3RyaW5nW10+IHJlZ2lzdGVyZWRNZXRyaWNzID0gbmV3
+IGphdmEudXRpbC5IYXNoTWFwPFN0cmluZywgU3RyaW5nW10+KCkgOwpzdGF0aWMgTG9nZ2VyIGxv
+Z2dlciA9IExvZ2dlci5nZXRMb2dnZXIoInd4LnByb21ldGhldXMiKTs=</value>
   <value name="extends"></value>
   <array name="implements" type="value" depth="1">
   </array>
   <array name="imports" type="value" depth="1">
     <value>java.util.Arrays</value>
     <value>java.util.HashMap</value>
-    <value>java.util.LinkedList</value>
     <value>com.wm.data.IData</value>
     <value>com.wm.data.IDataFactory</value>
     <value>com.wm.data.IDataUtil</value>

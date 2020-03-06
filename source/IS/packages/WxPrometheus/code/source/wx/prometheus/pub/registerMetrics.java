@@ -9,7 +9,6 @@ import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 import com.wm.data.IData;
 import com.wm.data.IDataFactory;
 import com.wm.data.IDataUtil;
@@ -38,14 +37,15 @@ public final class registerMetrics
 	{
 		// --- <<IS-START(countRegisteredMetricsProviders)>> ---
 		// @sigtype java 3.5
-		// [o] object:0:required nrRegisteredMetricsProviders
+		// [o] field:0:required nrRegisteredMetricsProviders
 		IDataCursor pipelineCursor = pipeline.getCursor();
 		int nrRegisteredMetricsProviders = 0;
 		if( registeredMetrics != null ) {
 			nrRegisteredMetricsProviders = registeredMetrics.size();
 		}
-		IDataUtil.put( pipelineCursor, "nrRegisteredMetricsProviders", nrRegisteredMetricsProviders );
+		IDataUtil.put( pipelineCursor, "nrRegisteredMetricsProviders", Integer.toString(nrRegisteredMetricsProviders) );
 		pipelineCursor.destroy();
+			
 		// --- <<IS-END>> ---
 
                 
@@ -60,8 +60,10 @@ public final class registerMetrics
 		// @specification wx.prometheus.pub.documents:prometheusMetric
 		// @sigtype java 3.5
 		java.util.List<IData> textMetricsList = new java.util.ArrayList<IData>();
-		if( registeredMetrics == null || registeredMetrics.size() == 0) {
-			registeredMetrics = new HashMap<String, String[]>();
+		java.util.List<String> textMetricsStringList = new java.util.ArrayList<String>();
+		java.util.List<Object> metricsBytesList = new java.util.ArrayList<Object>();
+		if( registeredMetrics == null ) {
+			registeredMetrics = new java.util.HashMap<String, String[]>();
 			try{
 				Service.doInvoke( "wx.prometheus.impl.registerMetrics", "loadConfig", IDataFactory.create() );
 			}catch( Exception e){
@@ -70,23 +72,33 @@ public final class registerMetrics
 		}
 		if( logger.getLevel() == Level.TRACE ) {
 			logger.trace("Getting registered metrics. Number of registered metrics services: " + registeredMetrics.size());
-		}
-		for( String[] service : registeredMetrics.values() ) {
-			if( service == null || service.length != 2 ) {
+		}		
+		String[] metric;
+		for( String service : registeredMetrics.keySet() ) {
+			metric = registeredMetrics.get(service);
+			if( metric == null || metric.length != 2 ) {
 				continue;
 			}
 			IData 	output = IDataFactory.create();
 			try{
-				output = Service.doInvoke( service[0], service[1], IDataFactory.create() );
+				output = Service.doInvoke( metric[0], metric[1], IDataFactory.create() );
 				IData[] textMetrics = IDataUtil.getIDataArray(output.getCursor(), "textMetrics");
-				textMetricsList.addAll(Arrays.asList(textMetrics));
+				String[] textMetricsString = IDataUtil.getStringArray(output.getCursor(), "textMetricsString");
+				Object[] metricsBytes = IDataUtil.getObjectArray(output.getCursor(), "metricsBytes");
+				if ( null != textMetrics ) textMetricsList.addAll(Arrays.asList(textMetrics));
+				
+				if ( null != textMetricsString ) textMetricsStringList.addAll(Arrays.asList(textMetricsString));
+				if ( null != metricsBytes ) metricsBytesList.addAll(Arrays.asList( metricsBytes));
+				
 			} catch( Exception e){
 				e.printStackTrace();
 				logger.error("WxPrometheus: Exception occurred when invoking registered metrics service: " + e);
 				
 			}
 		}
-		IDataUtil.put(pipeline.getCursor(), "textMetrics", textMetricsList.toArray(new IData[0]));
+		if (textMetricsList.size() > 0) IDataUtil.put(pipeline.getCursor(), "textMetrics", textMetricsList.toArray(new IData[textMetricsList.size()]));
+		if (textMetricsStringList.size() > 0) IDataUtil.put(pipeline.getCursor(), "textMetricsString", textMetricsStringList.toArray(new String[textMetricsStringList.size()]));
+		if (metricsBytesList.size() > 0) IDataUtil.put(pipeline.getCursor(), "metricsBytes", metricsBytesList.toArray( new Object[metricsBytesList.size()]));
 		// --- <<IS-END>> ---
 
                 
@@ -118,23 +130,49 @@ public final class registerMetrics
 			ifcname = service[0];
 			svcname = service[1];
 		}
-		else if (ifcname != null && !"".equals(ifcname) && svcname != null && !"".equals(svcname)){
+		logger.debug("Added service " + ifcname + ":" + svcname + " to the list of registered metrics services.");
+		registeredMetrics.put(metricsServiceFqn, new String[] {ifcname, svcname});
+			
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void unregisterMetrics (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(unregisterMetrics)>> ---
+		// @sigtype java 3.5
+		// [i] field:0:optional ifcname
+		// [i] field:0:optional svcname
+		// [i] field:0:optional metricsServiceFqn
+		// pipeline
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		String	ifcname = IDataUtil.getString( pipelineCursor, "ifcname" );
+		String	svcname = IDataUtil.getString( pipelineCursor, "svcname" );
+		String	metricsServiceFqn = IDataUtil.getString( pipelineCursor, "metricsServiceFqn" );
+		pipelineCursor.destroy();
+		
+		if( (ifcname == null || "".equals(ifcname) || svcname == null || "".equals(svcname) ) && (metricsServiceFqn == null || "".equals(metricsServiceFqn) )) {
+			throw new ServiceException("Provide the folder and service name for the service implementing the wx.prometheus.pub.documents:prometheusMetric specification");
+		}
+		
+		if( metricsServiceFqn == null || "".equals(metricsServiceFqn) ) {
 			metricsServiceFqn = ifcname + ":" + svcname;
 		}
-		else{
-			throw new ServiceException("Provide folder and servicename as ifcname and svcname OR as metricsServiceFqn, seperated by ':'");
-		}
-		logger.debug("Added service " + ifcname + ":" + svcname + " to list of registered metrics serivces.");
-		if (!registeredMetrics.containsKey(metricsServiceFqn)){
-			registeredMetrics.put(metricsServiceFqn, new String[] {ifcname, svcname});
-		}
+		
+		logger.debug("Removed service " + metricsServiceFqn + " from the list of registered metrics services.");
+		if (metricsServiceFqn != null) registeredMetrics.remove(metricsServiceFqn);
 		// --- <<IS-END>> ---
 
                 
 	}
 
 	// --- <<IS-START-SHARED>> ---
-	private static HashMap<String, String[]> registeredMetrics = new HashMap<String, String[]>();
+	//	private static java.util.List<String[]> registeredMetrics = new java.util.ArrayList<String[]>() ;
+	private static java.util.Map<String, String[]> registeredMetrics = new java.util.HashMap<String, String[]>() ;
 	static Logger logger = Logger.getLogger("wx.prometheus");
 	// --- <<IS-END-SHARED>> ---
 }

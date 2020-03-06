@@ -31,7 +31,11 @@ public final class date
 		// --- <<IS-START(currentTimeMillis)>> ---
 		// @sigtype java 3.5
 		// [o] object:0:required currentTimeMillis
-		IDataUtil.put(pipeline.getCursor(), "currentTimeMillis", new java.util.Date().getTime());
+		java.util.Date now = new java.util.Date();
+		IDataCursor idc_pipeline = pipeline.getCursor();
+		IDataUtil.put(idc_pipeline, "currentTimeMillis", now.getTime());
+		IDataUtil.put(idc_pipeline, "currentTimeMillisString", Long.toString(now.getTime()));
+		idc_pipeline.destroy();
 		// --- <<IS-END>> ---
 
                 

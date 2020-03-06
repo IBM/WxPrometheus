@@ -5,4 +5,11 @@
   <value name="node_subtype">unknown</value>
   <value name="node_nsName">wx.prometheus.impl.utils.date</value>
   <value name="is_public">false</value>
+  <value name="shared"></value>
+  <value name="encodeutf8">true</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+  </array>
 </Values>

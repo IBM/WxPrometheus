@@ -3,14 +3,22 @@
 <Values version="2.0">
   <value name="enabled">yes</value>
   <value name="system_package">no</value>
-  <value name="version">1.0</value>
+  <value name="version">2.0</value>
   <record name="startup_services" javaclass="com.wm.util.Values">
-    <null name="wx.prometheus.impl.startup:setupLogger"/>
     <null name="wx.prometheus.impl.startup:addAcl"/>
+    <null name="wx.prometheus.impl.startup:registerBuiltInMetrics"/>
+    <null name="wx.prometheus.impl.startup:setupLogger"/>
+    <null name="wx.prometheus.impl.startup:registerInternalMetrics"/>
   </record>
   <null name="shutdown_services"/>
   <null name="replication_services"/>
   <null name="requires"/>
   <value name="listACL">Default</value>
   <value name="webappLoad">yes</value>
+  <value name="name">WxPrometheus</value>
+  <value name="build"></value>
+  <value name="description"></value>
+  <value name="time">2020-02-11 18:15:01 CET</value>
+  <value name="jvm_version">1.8.0_222</value>
+  <value name="patch_nums"></value>
 </Values>
