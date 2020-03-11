@@ -5,7 +5,11 @@
   <value name="system_package">no</value>
   <value name="version">2.0</value>
   <record name="startup_services" javaclass="com.wm.util.Values">
-    <null name="wx.prometheus.impl.startup:intialize"/>
+    <null name="wx.prometheus.impl.startup:addAcl"/>
+    <null name="wx.prometheus.impl.startup:registerBuiltInMetrics"/>
+    <null name="wx.prometheus.impl.startup:registerInternalMetrics"/>
+    <null name="wx.prometheus.impl.startup:setupLogger"/>
+    <null name="wx.prometheus.impl.startup:registerUrlAlias"/>
   </record>
   <null name="shutdown_services"/>
   <null name="replication_services"/>
