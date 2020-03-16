@@ -5,6 +5,10 @@
 
   <!-- nodes -->
 
+<INVOKE TIMEOUT="" SERVICE="wm.server.query:getLicenseInfo" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+  <COMMENT></COMMENT>
+</INVOKE>
+
 <INVOKE TIMEOUT="" SERVICE="wm.server.httpUrlAlias:getAlias" VALIDATE-IN="$none" VALIDATE-OUT="$none">
   <COMMENT>Check if alias metrics already exists</COMMENT>
 
@@ -84,13 +88,13 @@
 </MAP>
 </INVOKE>
 
-<BRANCH TIMEOUT="" LABELEXPRESSIONS="true">
+<BRANCH TIMEOUT="" SWITCH="/LicenseInfo/Microservices">
   <COMMENT>do not &#34;override&#34; the standard metrics alias created by MSR</COMMENT>
 
   <!-- nodes -->
 
-<MAP NAME="%package% &amp;&amp; %package% != &#39;WxPrometheus&#39;" TIMEOUT="" MODE="STANDALONE">
-  <COMMENT>metrics alias taken by another package</COMMENT>
+<MAP NAME="true" TIMEOUT="" MODE="STANDALONE">
+  <COMMENT>metrics alias will be provided by WmRoot</COMMENT>
   <MAPTARGET>
 
 <Values version="2.0">
@@ -223,7 +227,7 @@
 </MAP>
 
 <MAP NAME="$default" TIMEOUT="" MODE="STANDALONE">
-  <COMMENT>metrics alias not associated with another package -&gt; take it</COMMENT>
+  <COMMENT>metrics alias will not be provided by WmRoot -&gt; take it</COMMENT>
   <MAPTARGET>
 
 <Values version="2.0">
@@ -482,6 +486,20 @@
         <value name="form_qualified">false</value>
         <value name="is_global">false</value>
       </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">LicenseInfo</value>
+        <value name="field_type">record</value>
+        <value name="field_dim">0</value>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <array name="rec_fields" type="record" depth="1">
+        </array>
+        <value name="modifiable">true</value>
+      </record>
     </array>
     <value name="modifiable">true</value>
   </record>
@@ -503,6 +521,9 @@
 </MAPDELETE>
 
 <MAPDELETE FIELD="/package;1;0">
+</MAPDELETE>
+
+<MAPDELETE FIELD="/LicenseInfo;2;0">
 </MAPDELETE>
 </MAP>
 
@@ -592,7 +613,7 @@
 
   <!-- nodes -->
 
-<MAPSET NAME="Setter" OVERWRITE="true" VARIABLES="false" GLOBALVARIABLES="false" FIELD="/messageText;1;0">
+<MAPSET NAME="Setter" OVERWRITE="true" VARIABLES="true" GLOBALVARIABLES="false" FIELD="/messageText;1;0">
   <DATA ENCODING="XMLValues" I18N="true">
 
 <Values version="2.0">
@@ -954,6 +975,122 @@
 
 <MAPDELETE FIELD="/package;1;0">
 </MAPDELETE>
+</MAP>
+</INVOKE>
+
+<INVOKE TIMEOUT="" SERVICE="wx.prometheus.impl.logging:logInfo" VALIDATE-IN="$none" VALIDATE-OUT="$none">
+  <COMMENT>Log alias creation result</COMMENT>
+
+  <!-- nodes -->
+
+<MAP MODE="INPUT">
+  <MAPTARGET>
+
+<Values version="2.0">
+  <record name="xml" javaclass="com.wm.util.Values">
+    <value name="node_type">record</value>
+    <value name="node_subtype">unknown</value>
+    <value name="node_comment"></value>
+    <value name="is_public">false</value>
+    <value name="field_type">record</value>
+    <value name="field_dim">0</value>
+    <value name="wrapper_type">IData</value>
+    <value name="nillable">true</value>
+    <value name="form_qualified">false</value>
+    <value name="is_global">false</value>
+    <array name="rec_fields" type="record" depth="1">
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="node_comment">an optional message text</value>
+        <record name="node_hints" javaclass="com.wm.util.Values">
+          <value name="field_usereditable">true</value>
+          <value name="field_largerEditor">false</value>
+          <value name="field_password">false</value>
+        </record>
+        <value name="is_public">false</value>
+        <value name="field_name">messageText</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <array name="field_options" type="value" depth="1">
+        </array>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+      <record javaclass="com.wm.util.Values">
+        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="node_comment"></value>
+        <record name="node_hints" javaclass="com.wm.util.Values">
+          <value name="field_usereditable">true</value>
+          <value name="field_largerEditor">false</value>
+          <value name="field_password">false</value>
+        </record>
+        <value name="is_public">false</value>
+        <value name="field_name">logger</value>
+        <value name="field_type">string</value>
+        <value name="field_dim">0</value>
+        <value name="field_opt">true</value>
+        <array name="field_options" type="value" depth="1">
+        </array>
+        <value name="nillable">true</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+      </record>
+    </array>
+    <value name="modifiable">true</value>
+  </record>
+</Values>
+</MAPTARGET>
+  <MAPSOURCE>
+
+<Values version="2.0">
+  <record name="xml" javaclass="com.wm.util.Values">
+    <value name="node_type">record</value>
+    <value name="node_subtype">unknown</value>
+    <value name="is_public">false</value>
+    <value name="field_type">record</value>
+    <value name="field_dim">0</value>
+    <value name="nillable">true</value>
+    <value name="form_qualified">false</value>
+    <value name="is_global">false</value>
+    <array name="rec_fields" type="record" depth="1">
+    </array>
+    <value name="modifiable">true</value>
+  </record>
+</Values>
+</MAPSOURCE>
+
+  <!-- nodes -->
+
+<MAPSET NAME="Setter" OVERWRITE="true" VARIABLES="true" GLOBALVARIABLES="false" FIELD="/messageText;1;0">
+  <DATA ENCODING="XMLValues" I18N="true">
+
+<Values version="2.0">
+  <value name="xml">%message%</value>
+  <record name="type" javaclass="com.wm.util.Values">
+    <value name="node_type">record</value>
+    <value name="node_subtype">unknown</value>
+    <value name="node_comment">an optional message text</value>
+    <record name="node_hints" javaclass="com.wm.util.Values">
+      <value name="field_usereditable">true</value>
+      <value name="field_largerEditor">false</value>
+      <value name="field_password">false</value>
+    </record>
+    <value name="is_public">false</value>
+    <value name="field_name">messageText</value>
+    <value name="field_type">string</value>
+    <value name="field_dim">0</value>
+    <array name="field_options" type="value" depth="1">
+    </array>
+    <value name="nillable">true</value>
+    <value name="form_qualified">false</value>
+    <value name="is_global">false</value>
+  </record>
+</Values>
+</DATA>
+</MAPSET>
 </MAP>
 </INVOKE>
 </FLOW>
