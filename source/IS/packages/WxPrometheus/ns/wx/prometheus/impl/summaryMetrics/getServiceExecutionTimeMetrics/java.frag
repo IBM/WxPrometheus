@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">getServiceExecutionTimeMetrics</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">SURhdGFNYXAgcGxNYXAgPSBuZXcgSURhdGFNYXAocGlwZWxpbmUpOwpTdHJpbmdXcml0ZXIgc3cg
+PSBuZXcgU3RyaW5nV3JpdGVyKCk7CnRyeSB7CglUZXh0Rm9ybWF0LndyaXRlMDA0KHN3LCBDb2xs
+ZWN0aW9ucy5lbnVtZXJhdGlvbihzZXJ2aWNlRXhlY3V0aW9uVGltZS5jb2xsZWN0KCkpKTsKCVRl
+eHRGb3JtYXQud3JpdGUwMDQoc3csIENvbGxlY3Rpb25zLmVudW1lcmF0aW9uKGF2Z1NlcnZpY2VF
+eGVjdXRpb25UaW1lLmNvbGxlY3QoKSkpOwp9IGNhdGNoIChJT0V4Y2VwdGlvbiBlKSB7Cglsb2dn
+ZXIuZXJyb3IoIkZhaWxlZCB0byByZW5kZXIgc2VydmljZSBleGVjdXRpb24gdGltZSBtZXRyaWNz
+OiAiK2UuZ2V0TWVzc2FnZSgpKTsKfQpwbE1hcC5wdXQoInRleHRNZXRyaWNzU3RyaW5nIiwgbmV3
+IFN0cmluZ1tdIHtzdy50b1N0cmluZygpfSk7Cgk=</value>
+</Values>

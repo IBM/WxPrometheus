@@ -31,6 +31,7 @@ public final class date
 		// --- <<IS-START(currentTimeMillis)>> ---
 		// @sigtype java 3.5
 		// [o] object:0:required currentTimeMillis
+		// [o] field:0:required currentTimeMillisString
 		java.util.Date now = new java.util.Date();
 		IDataCursor idc_pipeline = pipeline.getCursor();
 		IDataUtil.put(idc_pipeline, "currentTimeMillis", now.getTime());
