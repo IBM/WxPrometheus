@@ -12,8 +12,7 @@ import java.util.HashMap;
 import com.wm.data.IData;
 import com.wm.data.IDataFactory;
 import com.wm.data.IDataUtil;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import com.wm.util.JournalLogger;
 // --- <<IS-END-IMPORTS>> ---
 
 public final class registerMetrics
@@ -46,6 +45,7 @@ public final class registerMetrics
 		IDataUtil.put( pipelineCursor, "nrRegisteredMetricsProviders", Integer.toString(nrRegisteredMetricsProviders) );
 		pipelineCursor.destroy();
 			
+			
 		// --- <<IS-END>> ---
 
                 
@@ -67,12 +67,10 @@ public final class registerMetrics
 			try{
 				Service.doInvoke( "wx.prometheus.impl.registerMetrics", "loadConfig", IDataFactory.create() );
 			}catch( Exception e){
-				logger.error("Could not load config from service wx.prometheus.impl.registerMetrics:loadConfig: " + e);
+				JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.ERROR, "wx.prometheus", "Could not load config from service wx.prometheus.impl.registerMetrics:loadConfig: " + e );
 			}
 		}
-		if( logger.getLevel() == Level.TRACE ) {
-			logger.trace("Getting registered metrics. Number of registered metrics services: " + registeredMetrics.size());
-		}		
+		JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.TRACE, "wx.prometheus", "Getting registered metrics. Number of registered metrics services: " + registeredMetrics.size() );
 		String[] metric;
 		for( String service : registeredMetrics.keySet() ) {
 			metric = registeredMetrics.get(service);
@@ -91,14 +89,14 @@ public final class registerMetrics
 				if ( null != metricsBytes ) metricsBytesList.addAll(Arrays.asList( metricsBytes));
 				
 			} catch( Exception e){
-				e.printStackTrace();
-				logger.error("WxPrometheus: Exception occurred when invoking registered metrics service: " + e);
-				
+				JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.ERROR, "wx.prometheus", "WxPrometheus: Exception occurred when invoking registered metrics service: " + e );
 			}
 		}
 		if (textMetricsList.size() > 0) IDataUtil.put(pipeline.getCursor(), "textMetrics", textMetricsList.toArray(new IData[textMetricsList.size()]));
 		if (textMetricsStringList.size() > 0) IDataUtil.put(pipeline.getCursor(), "textMetricsString", textMetricsStringList.toArray(new String[textMetricsStringList.size()]));
 		if (metricsBytesList.size() > 0) IDataUtil.put(pipeline.getCursor(), "metricsBytes", metricsBytesList.toArray( new Object[metricsBytesList.size()]));
+			
+			
 		// --- <<IS-END>> ---
 
                 
@@ -130,8 +128,9 @@ public final class registerMetrics
 			ifcname = service[0];
 			svcname = service[1];
 		}
-		logger.debug("Added service " + ifcname + ":" + svcname + " to the list of registered metrics services.");
+		JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.DEBUG, "wx.prometheus", "Added service " + ifcname + ":" + svcname + " to the list of registered metrics services." );
 		registeredMetrics.put(metricsServiceFqn, new String[] {ifcname, svcname});
+			
 			
 		// --- <<IS-END>> ---
 
@@ -163,8 +162,9 @@ public final class registerMetrics
 			metricsServiceFqn = ifcname + ":" + svcname;
 		}
 		
-		logger.debug("Removed service " + metricsServiceFqn + " from the list of registered metrics services.");
+		JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.DEBUG, "wx.prometheus", "Removed service " + metricsServiceFqn + " from the list of registered metrics services." );
 		if (metricsServiceFqn != null) registeredMetrics.remove(metricsServiceFqn);
+			
 		// --- <<IS-END>> ---
 
                 
@@ -173,7 +173,8 @@ public final class registerMetrics
 	// --- <<IS-START-SHARED>> ---
 	//	private static java.util.List<String[]> registeredMetrics = new java.util.ArrayList<String[]>() ;
 	private static java.util.Map<String, String[]> registeredMetrics = new java.util.HashMap<String, String[]>() ;
-	static Logger logger = Logger.getLogger("wx.prometheus");
+		
+		
 	// --- <<IS-END-SHARED>> ---
 }
 

@@ -9,7 +9,6 @@ import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Properties;
@@ -17,6 +16,7 @@ import com.wm.app.b2b.server.ServerAPI;
 import com.wm.data.IData;
 import com.wm.data.IDataCursor;
 import com.wm.data.IDataUtil;
+import com.wm.util.JournalLogger;
 // --- <<IS-END-IMPORTS>> ---
 
 public final class registerMetrics
@@ -97,7 +97,7 @@ public final class registerMetrics
 			Properties props = new Properties();
 			try {
 				props.load(new FileInputStream(configFile));
-				logger.info("Found " + CONFIG_FILE_NAME + " file in config dir for package " + packageName);
+				JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.INFO, "wx.prometheus.config", "Found " + CONFIG_FILE_NAME + " file in config dir for package " + packageName );
 				String registerForPrometheus =  props.getProperty("registerForPrometheus", "false");
 				if( !"true".equals(registerForPrometheus) ) {
 					registerForPrometheus = "false";
@@ -113,11 +113,12 @@ public final class registerMetrics
 				IDataUtil.put( pipelineCursor, "packageConfig", packageConfig );
 		
 			} catch( IOException e ) {
-				logger.error("Could not load config file '" + CONFIG_FILE_NAME + "' for package " + packageName + ": " + e);
+				JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.ERROR, "wx.prometheus.config", "Could not load config file '" + CONFIG_FILE_NAME + "' for package " + packageName + ": " + e );
 			}
 			
 			pipelineCursor.destroy();
 		}
+			
 			
 		// --- <<IS-END>> ---
 
@@ -125,8 +126,8 @@ public final class registerMetrics
 	}
 
 	// --- <<IS-START-SHARED>> ---
-	static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger("wx.prometheus.config");
 	static String CONFIG_FILE_NAME = "wxprometheus.properties";
+		
 	// --- <<IS-END-SHARED>> ---
 }
 

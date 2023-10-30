@@ -7,11 +7,11 @@ import com.wm.util.Values;
 import com.wm.app.b2b.server.Service;
 import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
+import com.wm.util.JournalLogger;
 import java.io.File;
-import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
 import com.wm.app.b2b.server.ServerAPI;
 import com.wm.data.IData;
+import com.wm.app.log.*;
 // --- <<IS-END-IMPORTS>> ---
 
 public final class logging
@@ -46,28 +46,29 @@ public final class logging
 		String prefix = IDataUtil.getString( pipelineCursor, "prefix" );
 		pipelineCursor.destroy();
 		
-		if( prefix != null ) {
-			logMessage = prefix + " " + logMessage;
+		if ( logger == null ) {
+			prefix = "wx.prometheus";
+		}
+		if ( prefix != null ) {
+			prefix = logger + "." + prefix;
+		}
+		else {
+			prefix = logger;
 		}
 		
-		if( logger == null ) {
-			logger = "wx.prometheus";
-		}
-		
-		Logger log = Logger.getLogger(logger);
 		if( severity.equalsIgnoreCase("warn") ) {
-			log.warn(logMessage);
+			JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.WARNING, prefix, logMessage );
 		} else if( severity.equalsIgnoreCase("error") ) {
-			log.error(logMessage);
+			JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.ERROR, prefix, logMessage );
 		} else if( severity.equalsIgnoreCase("fatal") ) {
-			log.fatal(logMessage);
+			JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.CRITICAL, prefix, logMessage );
 		} else if( severity.equalsIgnoreCase("info") ) {
-			log.info(logMessage);
+			JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.INFO, prefix, logMessage );
 		} else if( severity.equalsIgnoreCase("debug") ) {
-			log.debug(logMessage);
+			JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.DEBUG, prefix, logMessage );
 		} else {
-			log.trace(logMessage);
-		}			
+			JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.TRACE, prefix, logMessage );
+		}
 			
 		// --- <<IS-END>> ---
 

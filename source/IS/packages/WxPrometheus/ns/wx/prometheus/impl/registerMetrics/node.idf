@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
-  <value name="node_type">interface</value>
-  <value name="node_subtype">unknown</value>
-  <value name="node_nsName">wx.prometheus.impl.registerMetrics</value>
-  <value name="is_public">false</value>
-  <value name="shared">c3RhdGljIG9yZy5hcGFjaGUubG9nNGouTG9nZ2VyIGxvZ2dlciA9IG9yZy5hcGFjaGUubG9nNGou
-TG9nZ2VyLmdldExvZ2dlcigid3gucHJvbWV0aGV1cy5jb25maWciKTsKc3RhdGljIFN0cmluZyBD
-T05GSUdfRklMRV9OQU1FID0gInd4cHJvbWV0aGV1cy5wcm9wZXJ0aWVzIjs=</value>
+  <value name="shared">c3RhdGljIFN0cmluZyBDT05GSUdfRklMRV9OQU1FID0gInd4cHJvbWV0aGV1cy5wcm9wZXJ0aWVz
+IjsKCQo=</value>
   <value name="encodeutf8">true</value>
-  <value name="extends"></value>
-  <array name="implements" type="value" depth="1">
-  </array>
   <array name="imports" type="value" depth="1">
     <value>java.io.File</value>
     <value>java.io.FileInputStream</value>
-    <value>java.io.FileNotFoundException</value>
     <value>java.io.FilenameFilter</value>
     <value>java.io.IOException</value>
     <value>java.util.Properties</value>
@@ -23,5 +14,6 @@ T05GSUdfRklMRV9OQU1FID0gInd4cHJvbWV0aGV1cy5wcm9wZXJ0aWVzIjs=</value>
     <value>com.wm.data.IData</value>
     <value>com.wm.data.IDataCursor</value>
     <value>com.wm.data.IDataUtil</value>
+    <value>com.wm.util.JournalLogger</value>
   </array>
 </Values>

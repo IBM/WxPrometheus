@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
-  <value name="node_type">interface</value>
-  <value name="node_subtype">unknown</value>
-  <value name="node_nsName">wx.prometheus.impl.metrics</value>
-  <value name="is_public">false</value>
   <value name="shared">cHJpdmF0ZSBzdGF0aWMgZmluYWwgU3RyaW5nIE5FV0xJTkUgPSAiXG4iOwoKcHJpdmF0ZSBzdGF0
 aWMgZmluYWwgU3RyaW5nIGdldExlZ2FjeU1ldHJpY3MoU3RyaW5nIFRZUEUsIFN0cmluZyBIRUxQ
 LCBJRGF0YVtdIG1ldHJpY3MpIHsKCVN0cmluZ0J1aWxkZXIgdGV4dCA9IG5ldyBTdHJpbmdCdWls
@@ -75,11 +71,8 @@ YmVsX25hbWUgKyAiPVwiIiArIGxhYmVsX3ZhbHVlICsgIlwiIik7CgkJCQlpbmRleCsrOwoJCQl9
 CgkJCXRleHQuYXBwZW5kKCJ9Iik7CgkJfQoJCXRleHQuYXBwZW5kKCIgIiArIHZhbHVlKTsJCQkK
 CQlpZiggdGltZXN0YW1wICE9IG51bGwgJiYgISIiLmVxdWFscyh0aW1lc3RhbXApKSAKCQkJdGV4
 dC5hcHBlbmQoIiAiICsgdGltZXN0YW1wKTsKCQl0ZXh0LmFwcGVuZChORVdMSU5FKTsJCQkKCX0J
-CQkJCQkJCglyZXR1cm4gdGV4dC50b1N0cmluZygpOwp9</value>
+CQkJCQkJCglyZXR1cm4gdGV4dC50b1N0cmluZygpOwp9Cg==</value>
   <value name="encodeutf8">true</value>
-  <value name="extends"></value>
-  <array name="implements" type="value" depth="1">
-  </array>
   <array name="imports" type="value" depth="1">
     <value>java.util.Map</value>
     <value>com.softwareag.util.IDataMap</value>

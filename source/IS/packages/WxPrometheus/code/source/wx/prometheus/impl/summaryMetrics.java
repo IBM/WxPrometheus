@@ -16,7 +16,7 @@ import com.softwareag.util.IDataMap;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Summary;
 import io.prometheus.client.exporter.common.TextFormat;
-import org.apache.log4j.Logger;
+import com.wm.util.JournalLogger;
 // --- <<IS-END-IMPORTS>> ---
 
 public final class summaryMetrics
@@ -47,9 +47,10 @@ public final class summaryMetrics
 			TextFormat.write004(sw, Collections.enumeration(serviceExecutionTime.collect()));
 			TextFormat.write004(sw, Collections.enumeration(avgServiceExecutionTime.collect()));
 		} catch (IOException e) {
-			logger.error("Failed to render service execution time metrics: "+e.getMessage());
+			JournalLogger.log(4,  JournalLogger.FAC_FLOW_SVC, JournalLogger.ERROR, "wx.prometheus", "Failed to render service execution time metrics: "+e.getMessage() );
 		}
 		plMap.put("textMetricsString", new String[] {sw.toString()});
+			
 			
 		// --- <<IS-END>> ---
 
@@ -94,7 +95,6 @@ public final class summaryMetrics
 			.help("Average service execution time in Milliseconds")
 			.create();
 	
-	static Logger logger = Logger.getLogger("wx.prometheus");
 		
 	// --- <<IS-END-SHARED>> ---
 }

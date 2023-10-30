@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
-  <value name="node_type">interface</value>
-  <value name="node_subtype">unknown</value>
-  <value name="node_nsName">wx.prometheus.impl.summaryMetrics</value>
-  <value name="is_public">false</value>
-  <value name="encodeutf8">true</value>
   <value name="shared">cHVibGljIHN0YXRpYyBmaW5hbCBTdW1tYXJ5IHNlcnZpY2VFeGVjdXRpb25UaW1lID0gU3VtbWFy
 eS5idWlsZCgpCgkJLm5hbWUoInNlcnZpY2VFeGVjdXRpb25UaW1lIikKCQkubGFiZWxOYW1lcygi
 c2VydmljZU5hbWUiKQoJCS5xdWFudGlsZSgwLjA1LCAwLjAwMSkKCQkucXVhbnRpbGUoMC41LCAw
@@ -14,11 +9,8 @@ cyB0aW1lIGluIE1pbGxpc2Vjb25kcyIpCQoJCS5jcmVhdGUoKTsKCnB1YmxpYyBzdGF0aWMgZmlu
 YWwgR2F1Z2UgYXZnU2VydmljZUV4ZWN1dGlvblRpbWUgPSBHYXVnZS5idWlsZCgpCgkJLm5hbWUo
 ImF2Z1NlcnZpY2VFeGVjdXRpb25UaW1lIikKCQkubGFiZWxOYW1lcygic2VydmljZU5hbWUiKQoJ
 CS5oZWxwKCJBdmVyYWdlIHNlcnZpY2UgZXhlY3V0aW9uIHRpbWUgaW4gTWlsbGlzZWNvbmRzIikK
-CQkuY3JlYXRlKCk7CgpzdGF0aWMgTG9nZ2VyIGxvZ2dlciA9IExvZ2dlci5nZXRMb2dnZXIoInd4
-LnByb21ldGhldXMiKTsKCQ==</value>
-  <value name="extends"></value>
-  <array name="implements" type="value" depth="1">
-  </array>
+CQkuY3JlYXRlKCk7CgoJCg==</value>
+  <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>java.io.IOException</value>
     <value>java.io.StringWriter</value>
@@ -29,6 +21,6 @@ LnByb21ldGhldXMiKTsKCQ==</value>
     <value>io.prometheus.client.Gauge</value>
     <value>io.prometheus.client.Summary</value>
     <value>io.prometheus.client.exporter.common.TextFormat</value>
-    <value>org.apache.log4j.Logger</value>
+    <value>com.wm.util.JournalLogger</value>
   </array>
 </Values>
