@@ -1,1 +1,4 @@
-/source/IS/packages/WxPrometheus/config/urlalias.cnf
+/config/urlalias.cnf
+/.project
+/.classpath
+**.bak
