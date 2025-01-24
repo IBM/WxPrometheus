@@ -25,15 +25,15 @@ Note, this packages provides only functionality for the Prometheus protocol. You
 
 ## Version History
 
-### 1.0
+### v1.0
 
 Initial release.
 
-### 2.0
+### v2.0
 
 Remove dependency and implementation of Log4J v1. Now, log messages are pushed to IS server logger directly. Also, tested for wM 10.15.
 
-### 2.1
+### v2.1
 
 In Kubernetes and Microservices Runtime (MSR) environment, it make sense to have one entrypoint `/metrics` for scrapping. If you want to have both metrics ...
 
