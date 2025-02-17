@@ -20,8 +20,8 @@ The process is as follows:
 
 Note, this packages provides only functionality for the Prometheus protocol. You should install following related packages to collect metrics ...
 
-* [WxPlatformMonitoring](../../../WxPlatformMonitoring/README.md)
-* [WxPlatformInsight](../../../WxPlatformInsight/README.md)
+* [WxPlatformMonitoring](https://github.com/IBM/WxPlatformMonitoring)
+* [WxPlatformInsight](https://github.com/IBM/WxPlatformInsight)
 
 ## Version History
 
