@@ -23,6 +23,10 @@ Note, this packages provides only functionality for the Prometheus protocol. You
 * [WxPlatformMonitoring](https://github.com/IBM/WxPlatformMonitoring)
 * [WxPlatformInsight](https://github.com/IBM/WxPlatformInsight)
 
+## Dependencies 
+
+There are no dependent packages.
+
 ## Version History
 
 ### v1.0
@@ -38,7 +42,7 @@ Remove dependency and implementation of Log4J v1. Now, log messages are pushed t
 In Kubernetes and Microservices Runtime (MSR) environment, it make sense to have one entrypoint `/metrics` for scrapping. If you want to have both metrics ...
 
 * MSR build-in and
-* e.g. `WxPlatformInsigth` package, ...
+* e.g. [WxPlatformInsight](https://github.com/IBM/WxPlatformInsight) package, ...
 
 together in one endpoint, you should set the Watt properties `watt.wx.prometheus.overwriteUrlAlias=true` and `watt.wx.prometheus.addBuiltInMetrics=true`
 
